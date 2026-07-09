@@ -1,18 +1,26 @@
 export const serviceCategories = [
   {
     title: "Insurance",
-    description: "Life, health, vehicle and term insurance solutions.",
+    description:
+      "Life, health, motor, term and other insurance solutions.",
+    href: "/services/insurance",
   },
   {
     title: "Documentation",
-    description: "Passport, PAN, Aadhaar, Driving Licence and government documentation.",
+    description:
+      "Government documentation including Passport, PAN, Aadhaar and more.",
+    href: "/services/documentation",
   },
   {
     title: "Financial Guidance",
-    description: "Investment planning and financial assistance.",
+    description:
+      "Professional guidance for financial planning and related services.",
+    href: "/services/financial-guidance",
   },
   {
-    title: "Ayurvedic Wellness",
-    description: "Consultation and quality Ayurvedic products.",
+    title: "Ayurvedic Consultation",
+    description:
+      "Ayurvedic products and wellness consultation based on individual needs.",
+    href: "/services/ayurvedic-consultation",
   },
 ];
