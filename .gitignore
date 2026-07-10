@@ -39,6 +39,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-docs/AI_CONTEXT.md
+docs/private
 
 public
