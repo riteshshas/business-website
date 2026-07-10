@@ -13,19 +13,4 @@ export const heroContent = {
     label: "Call Now",
     href: "tel:+919850818378",
   },
-
-  trustCards: [
-    {
-      value: "20+",
-      label: "Years of Experience",
-    },
-    {
-      value: "1000+",
-      label: "Customers Assisted",
-    },
-    {
-      value: "✓",
-      label: "Personal Guidance",
-    },
-  ],
 };

@@ -143,26 +143,6 @@ export default function Hero() {
               ))}
             </div>
           </section>
-
-          <section
-            aria-label="Trust indicators"
-            className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3"
-          >
-            {heroContent.trustCards.map((card) => (
-              <div
-                key={card.label}
-                className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-4 text-center"
-              >
-                <p className="text-xl font-semibold text-slate-900">
-                  {card.value}
-                </p>
-
-                <p className="mt-1 text-xs leading-5 text-slate-600">
-                  {card.label}
-                </p>
-              </div>
-            ))}
-          </section>
         </div>
 
         {/* Right Column */}
