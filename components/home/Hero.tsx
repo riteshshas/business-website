@@ -74,7 +74,7 @@ const icons: Record<string, ReactNode> = {
 
 export default function Hero() {
   return (
-    <section className="bg-white">
+    <section id="home" className="bg-white">
       <div className="mx-auto flex max-w-7xl flex-col gap-12 px-6 py-16 lg:flex-row lg:items-center lg:gap-12 lg:px-8 lg:py-24">
         {/* Left Column */}
         <div className="w-full lg:w-[70%]">

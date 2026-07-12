@@ -15,4 +15,7 @@ export const businessInfo = {
   address: "Pune, Maharashtra",
 
   workingHours: "Monday - Saturday | 10:00 AM - 7:00 PM",
+
+  footerDescription:
+  "Helping individuals and families navigate insurance, documentation and financial decisions with honest guidance and personal support.",
 };

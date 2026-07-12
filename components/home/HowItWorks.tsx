@@ -2,7 +2,7 @@ import { processSteps } from "@/data/process";
 
 export default function HowItWorks() {
   return (
-    <section className="bg-slate-50 py-16 sm:py-20 lg:py-24">
+    <section id="process" className="bg-slate-50 py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-4xl px-6 lg:px-8">
         <header className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">

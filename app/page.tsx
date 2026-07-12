@@ -5,6 +5,7 @@ import WhyChooseUs from "@/components/home/WhyChooseUs";
 import MeetConsultant from "@/components/home/MeetConsultant";
 import Faq from "@/components/home/Faq";
 import Contact from "@/components/home/Contact";
+import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   return (
@@ -15,6 +16,8 @@ export default function Home() {
       <WhyChooseUs />
       <MeetConsultant />
       <Faq />
+      <Contact />
+      <Footer />
     </main>
   );
 }
