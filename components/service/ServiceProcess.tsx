@@ -1,0 +1,4 @@
+import type { ServiceProcessStep } from "@/types/services";
+export default function ServiceProcess({ steps }: { steps: ServiceProcessStep[] }) {
+  return <section className="bg-white py-16 sm:py-20"><div className="mx-auto max-w-4xl px-6 lg:px-8"><header className="max-w-2xl"><h2 className="text-3xl font-bold tracking-tight text-slate-900">Our Process</h2><p className="mt-4 leading-7 text-slate-600">We guide you through each step with clear information and practical support.</p></header><ol className="mt-12 space-y-8">{steps.map((step, index) => <li key={step.title} className="flex gap-5"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-slate-900 text-sm font-semibold text-slate-900">{String(index + 1).padStart(2, "0")}</div><div><h3 className="text-xl font-semibold text-slate-900">{step.title}</h3><p className="mt-2 leading-7 text-slate-600">{step.description}</p></div></li>)}</ol></div></section>;
+}
