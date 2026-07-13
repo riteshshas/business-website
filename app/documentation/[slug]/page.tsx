@@ -1,36 +1,42 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
 import ServiceCallToAction from "@/components/service/ServiceCallToAction";
 import ServiceFaq from "@/components/service/ServiceFaq";
 import ServiceHero from "@/components/service/ServiceHero";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import RequiredDocuments from "@/components/service/RequiredDocuments";
-import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar";
 import {
-  getInsuranceService,
-  insuranceServices,
-} from "@/data/services/insurance";
+  documentationServices,
+  getDocumentationService,
+} from "@/data/services/documentation";
 
-type PageProps = { params: Promise<{ slug: string }> };
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
 
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
 
 export function generateStaticParams() {
-  return insuranceServices.map(({ slug }) => ({ slug }));
+  return documentationServices.map(({ slug }) => ({ slug }));
 }
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const service = getInsuranceService((await params).slug);
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const service = getDocumentationService((await params).slug);
+
   return service
     ? { title: service.title, description: service.shortDescription }
     : {};
 }
-export default async function InsuranceServicePage({ params }: PageProps) {
-  const service = getInsuranceService((await params).slug);
+
+export default async function DocumentationServicePage({ params }: PageProps) {
+  const service = getDocumentationService((await params).slug);
+
   if (!service) notFound();
+
   return (
     <>
       <Navbar />
