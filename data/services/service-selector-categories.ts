@@ -1,4 +1,5 @@
 import { documentationServiceOptions } from "@/data/services/documentation";
+import { ayurvedicConsultationServiceOptions } from "@/data/services/ayurvedic-consultation";
 import { financialGuidanceServiceOptions } from "@/data/services/financial-guidance";
 import { insuranceServiceOptions } from "@/data/services/insurance";
 import type { ServiceSelectorOption } from "@/types/services";
@@ -53,7 +54,8 @@ export const serviceSelectorCategories: ServiceCategory[] = [
     description: "Ayurvedic products and wellness consultation based on individual needs.",
     icon: "leaf",
     routeBase: "/ayurvedic-consultation",
-    interaction: "unavailable",
-    services: [],
+    interaction: "selector",
+    selectorDescription: "Select the Ayurvedic consultation guidance you need.",
+    services: ayurvedicConsultationServiceOptions,
   },
 ];
