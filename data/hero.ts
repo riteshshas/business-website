@@ -6,7 +6,7 @@ export const heroContent = {
 
   primaryCTA: {
     label: "Get Assistance",
-    href: "/contact",
+    href: "#contact",
   },
 
   secondaryCTA: {

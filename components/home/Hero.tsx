@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ServiceCategoryCards from "@/components/home/ServiceCategoryCards";
 import { heroContent } from "@/data/hero";
-import { serviceCategories } from "@/data/services";
+import { serviceSelectorCategories } from "@/data/services/service-selector-categories";
 
 export default function Hero() {
   return (
@@ -32,7 +32,7 @@ export default function Hero() {
             >
               How can we help you today?
             </h2>
-            <ServiceCategoryCards categories={serviceCategories} />
+            <ServiceCategoryCards categories={serviceSelectorCategories} />
           </section>
         </div>
         <div className="w-full lg:w-[30%]">
