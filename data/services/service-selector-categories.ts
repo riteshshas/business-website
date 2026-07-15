@@ -1,4 +1,5 @@
 import { documentationServiceOptions } from "@/data/services/documentation";
+import { financialGuidanceServiceOptions } from "@/data/services/financial-guidance";
 import { insuranceServiceOptions } from "@/data/services/insurance";
 import type { ServiceSelectorOption } from "@/types/services";
 
@@ -42,8 +43,9 @@ export const serviceSelectorCategories: ServiceCategory[] = [
     description: "Professional guidance for financial planning and related services.",
     icon: "financial",
     routeBase: "/financial-guidance",
-    interaction: "unavailable",
-    services: [],
+    interaction: "selector",
+    selectorDescription: "Select the financial guidance you would like to explore.",
+    services: financialGuidanceServiceOptions,
   },
   {
     id: "ayurvedic-consultation",
