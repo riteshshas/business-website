@@ -1,20 +1,22 @@
+"use client";
+
 import Image from "next/image";
 
 import { consultant } from "@/data/about";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function MeetConsultant() {
+  const { t } = useLanguage();
   return (
     <section id="about" className="bg-white py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <header className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Meet Your Consultant
+            {t.consultant.heading}
           </h2>
 
           <p className="mt-4 text-lg leading-8 text-slate-600">
-            Behind every successful application is clear guidance and personal
-            attention. Here's the person committed to helping you through every
-            step.
+            {t.consultant.description}
           </p>
         </header>
 
@@ -42,37 +44,37 @@ export default function MeetConsultant() {
                 </h3>
 
                 <p className="mt-2 text-lg text-slate-600">
-                  {consultant.title}
+                  {t.consultant.title}
                 </p>
               </div>
 
               <div className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700">
-                {consultant.experience}
+                {t.consultant.experience}
               </div>
             </div>
 
             <div className="mt-8 space-y-6">
               <p className="leading-8 text-slate-600">
-                {consultant.introduction}
+                {t.consultant.introduction}
               </p>
 
               <div>
                 <h4 className="text-lg font-semibold text-slate-900">
-                  My Approach
+                  {t.consultant.approach}
                 </h4>
 
                 <p className="mt-3 leading-8 text-slate-600">
-                  {consultant.mission}
+                  {t.consultant.mission}
                 </p>
               </div>
 
               <div>
                 <h4 className="text-lg font-semibold text-slate-900">
-                  What You Can Expect
+                  {t.consultant.expect}
                 </h4>
 
                 <ul className="mt-4 space-y-3">
-                  {consultant.values.map((value) => (
+                  {t.consultant.values.map((value) => (
                     <li key={value} className="flex items-start gap-3">
                       <span
                         className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-100 text-green-700"

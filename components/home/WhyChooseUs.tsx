@@ -1,4 +1,7 @@
+"use client";
+
 import { whyChooseUs } from "@/data/why-choose-us";
+import { useLanguage } from "@/context/LanguageContext";
 
 const icons: Record<string, React.ReactNode> = {
   Experience: (
@@ -118,23 +121,22 @@ const defaultIcon = (
 );
 
 export default function WhyChooseUs() {
+  const { t } = useLanguage();
   return (
     <section id="why-choose-us" className="bg-white py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <header className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Why Choose Us?
+            {t.why.heading}
           </h2>
 
           <p className="mt-4 text-lg leading-8 text-slate-600">
-            Choosing the right guidance can make every step simpler. Here's why
-            individuals and families continue to trust us with their insurance,
-            documentation and financial needs.
+            {t.why.description}
           </p>
         </header>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-          {whyChooseUs.map((reason) => (
+          {whyChooseUs.map((reason, index) => (
             <article
               key={reason.title}
               className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-slate-300 hover:shadow-md"
@@ -144,11 +146,11 @@ export default function WhyChooseUs() {
               </div>
 
               <h3 className="mt-5 text-xl font-semibold text-slate-900">
-                {reason.title}
+                {t.why.items[index]?.[0] ?? reason.title}
               </h3>
 
               <p className="mt-3 leading-7 text-slate-600">
-                {reason.description}
+                {t.why.items[index]?.[1] ?? reason.description}
               </p>
             </article>
           ))}

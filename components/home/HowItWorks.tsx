@@ -1,21 +1,24 @@
+"use client";
+
 import { processSteps } from "@/data/process";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function HowItWorks() {
+  const { t } = useLanguage();
   return (
     <section id="process" className="bg-slate-50 py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-4xl px-6 lg:px-8">
         <header className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            What Happens Next?
+            {t.process.heading}
           </h2>
 
           <p className="mt-4 text-lg leading-8 text-slate-600">
-            From your first enquiry to the final document or policy, we guide
-            you through every step of the process.
+            {t.process.description}
           </p>
         </header>
 
-        <ol className="mt-14 space-y-10" aria-label="Process timeline">
+        <ol className="mt-14 space-y-10" aria-label={t.process.timeline}>
           {processSteps.map((step, index) => {
             const isLast = index === processSteps.length - 1;
 
@@ -39,15 +42,15 @@ export default function HowItWorks() {
 
                 <div className="flex-1 pb-2">
                   <span className="text-sm font-medium uppercase tracking-wider text-slate-500">
-                    Step {String(index + 1).padStart(2, "0")}
+                  {t.process.step} {String(index + 1).padStart(2, "0")}
                   </span>
 
                   <h3 className="mt-1 text-xl font-semibold text-slate-900">
-                    {step.title}
+                    {t.process.items[index]?.[0] ?? step.title}
                   </h3>
 
                   <p className="mt-3 leading-7 text-slate-600">
-                    {step.description}
+                    {t.process.items[index]?.[1] ?? step.description}
                   </p>
                 </div>
               </li>

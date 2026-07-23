@@ -4,6 +4,7 @@ import { useActionState, useEffect, useRef } from "react";
 
 import { submitEnquiryForm } from "@/app/actions/enquiries";
 import { contact } from "@/data/contact";
+import { useLanguage } from "@/context/LanguageContext";
 import type { EnquiryFieldErrors, SubmitEnquiryResult } from "@/types/enquiry";
 
 const initialEnquiryState: SubmitEnquiryResult = {
@@ -177,6 +178,7 @@ const contactCards = [
 ];
 
 export default function Contact() {
+  const { t } = useLanguage();
   const formRef = useRef<HTMLFormElement>(null);
   const [state, formAction, isPending] = useActionState(
     submitEnquiryForm,
@@ -203,11 +205,11 @@ export default function Contact() {
               id="contact-heading"
               className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl"
             >
-              {contact.heading}
+              {t.contact.heading}
             </h2>
 
             <p className="mt-4 text-base leading-7 text-neutral-600">
-              {contact.description}
+              {t.contact.description}
             </p>
           </div>
 
@@ -236,11 +238,11 @@ export default function Contact() {
         <div className="w-full lg:w-7/12">
           <div className="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm">
             <h3 className="text-2xl font-semibold text-neutral-900">
-              {contact.enquiry.heading}
+              {t.contact.enquiryHeading}
             </h3>
 
             <p className="mt-3 text-neutral-600">
-              {contact.enquiry.description}
+              {t.contact.enquiryDescription}
             </p>
 
             <form ref={formRef} action={formAction} className="mt-8 space-y-6">
@@ -249,7 +251,7 @@ export default function Contact() {
                   htmlFor="name"
                   className="mb-2 block text-sm font-medium text-neutral-900"
                 >
-                  Name
+                  {t.contact.name}
                 </label>
 
                 <input
@@ -257,7 +259,7 @@ export default function Contact() {
                   name="name"
                   type="text"
                   autoComplete="name"
-                  placeholder="Enter your name"
+                  placeholder={t.contact.namePlaceholder}
                   aria-invalid={Boolean(fieldErrors.name)}
                   aria-describedby={
                     fieldErrors.name ? "name-error" : undefined
@@ -277,7 +279,7 @@ export default function Contact() {
                   htmlFor="phone"
                   className="mb-2 block text-sm font-medium text-neutral-900"
                 >
-                  Phone Number
+                  {t.contact.phone}
                 </label>
 
                 <input
@@ -285,7 +287,7 @@ export default function Contact() {
                   name="phone"
                   type="tel"
                   autoComplete="tel"
-                  placeholder="Enter your phone number"
+                  placeholder={t.contact.phonePlaceholder}
                   aria-invalid={Boolean(fieldErrors.phone)}
                   aria-describedby={
                     fieldErrors.phone ? "phone-error" : undefined
@@ -305,7 +307,7 @@ export default function Contact() {
                   htmlFor="service"
                   className="mb-2 block text-sm font-medium text-neutral-900"
                 >
-                  What can we help you with?
+                  {t.contact.service}
                 </label>
 
                 <select
@@ -319,10 +321,10 @@ export default function Contact() {
                   className="w-full rounded-xl border border-neutral-300 bg-white px-4 py-3 text-neutral-900 focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/10"
                 >
                   <option value="" disabled>
-                    Select a service
+                    {t.contact.selectService}
                   </option>
 
-                  {contact.services.map((service) => (
+                  {t.contact.services.map((service) => (
                     <option key={service} value={service}>
                       {service}
                     </option>
@@ -341,14 +343,14 @@ export default function Contact() {
                   htmlFor="message"
                   className="mb-2 block text-sm font-medium text-neutral-900"
                 >
-                  Message
+                  {t.contact.message}
                 </label>
 
                 <textarea
                   id="message"
                   name="message"
                   rows={5}
-                  placeholder="Tell us how we can help you"
+                  placeholder={t.contact.messagePlaceholder}
                   aria-invalid={Boolean(fieldErrors.message)}
                   aria-describedby={
                     fieldErrors.message ? "message-error" : undefined
@@ -381,7 +383,7 @@ export default function Contact() {
                 disabled={isPending}
                 className="inline-flex w-full items-center justify-center rounded-xl bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
               >
-                {isPending ? "Submitting..." : contact.enquiry.button}
+                {isPending ? t.contact.submitting : t.contact.button}
               </button>
             </form>
           </div>

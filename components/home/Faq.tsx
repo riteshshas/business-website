@@ -4,26 +4,28 @@ import { useState } from "react";
 import Link from "next/link";
 
 import { faqs } from "@/data/faq";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState(0);
+  const { t } = useLanguage();
 
   return (
     <section id="faq" className="bg-white py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-4xl px-6 lg:px-8">
         <header className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Frequently Asked Questions
+            {t.faq.heading}
           </h2>
 
           <p className="mt-4 text-lg leading-8 text-slate-600">
-            Find answers to some of the most common questions about our
-            services, process and how we can help you.
+            {t.faq.description}
           </p>
         </header>
 
         <div className="mt-14 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white shadow-sm">
           {faqs.map((faq, index) => {
+            const translatedFaq = t.faq.items[index];
             const isOpen = openIndex === index;
             const answerId = `faq-answer-${index}`;
             const questionId = `faq-question-${index}`;
@@ -41,7 +43,7 @@ export default function Faq() {
                     }
                   >
                     <span className="text-lg font-semibold text-slate-900">
-                      {faq.question}
+                      {translatedFaq?.[0] ?? faq.question}
                     </span>
 
                     <svg
@@ -73,7 +75,7 @@ export default function Faq() {
                 >
                   <div className="px-6 pb-6">
                     <p className="leading-7 text-slate-600">
-                      {faq.answer}
+                      {translatedFaq?.[1] ?? faq.answer}
                     </p>
                   </div>
                 </div>
@@ -84,19 +86,18 @@ export default function Faq() {
 
         <div className="mt-16 rounded-2xl border border-slate-200 bg-slate-50 px-6 py-10 text-center">
           <h3 className="text-2xl font-semibold text-slate-900">
-            Still have a question?
+            {t.faq.moreHeading}
           </h3>
 
           <p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-600">
-            Our team is happy to help you understand the process and guide you
-            in the right direction.
+            {t.faq.moreDescription}
           </p>
 
           <Link
             href="#contact"
             className="mt-8 inline-flex items-center justify-center rounded-lg bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
           >
-            Contact Us
+            {t.faq.contact}
           </Link>
         </div>
       </div>
