@@ -1,5 +1,5 @@
 "use server";
-
+import { sendTelegramNotification } from "@/lib/notifications/telegram";
 import { validateCreateEnquiry } from "@/lib/validators/enquiry";
 import { createClient } from "@/lib/supabase/server";
 import type { CreateEnquiryInput, SubmitEnquiryResult } from "@/types/enquiry";
@@ -63,6 +63,18 @@ export async function submitEnquiry(
       fieldErrors: {},
     };
   }
+
+try {
+  await sendTelegramNotification({
+    name: validation.data.name,
+    phone: validation.data.phone,
+    email: validation.data.email,
+    service: validation.data.service,
+    message: validation.data.message,
+  });
+} catch (error) {
+  console.error("Failed to send Telegram notification:", error);
+}
 
   return {
     success: true,
