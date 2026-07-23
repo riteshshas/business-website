@@ -1,6 +1,16 @@
 "use client";
 
+import { useActionState, useEffect, useRef } from "react";
+
+import { submitEnquiryForm } from "@/app/actions/enquiries";
 import { contact } from "@/data/contact";
+import type { EnquiryFieldErrors, SubmitEnquiryResult } from "@/types/enquiry";
+
+const initialEnquiryState: SubmitEnquiryResult = {
+  success: false,
+  message: "",
+  fieldErrors: {},
+};
 
 const cardIcons: Record<string, React.ReactNode> = {
   phone: (
@@ -167,6 +177,19 @@ const contactCards = [
 ];
 
 export default function Contact() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [state, formAction, isPending] = useActionState(
+    submitEnquiryForm,
+    initialEnquiryState,
+  );
+  const fieldErrors: EnquiryFieldErrors = state.success ? {} : state.fieldErrors;
+
+  useEffect(() => {
+    if (state.success) {
+      formRef.current?.reset();
+    }
+  }, [state]);
+
   return (
     <section
       id="contact"
@@ -220,7 +243,7 @@ export default function Contact() {
               {contact.enquiry.description}
             </p>
 
-            <form className="mt-8 space-y-6">
+            <form ref={formRef} action={formAction} className="mt-8 space-y-6">
               <div>
                 <label
                   htmlFor="name"
@@ -235,8 +258,18 @@ export default function Contact() {
                   type="text"
                   autoComplete="name"
                   placeholder="Enter your name"
+                  aria-invalid={Boolean(fieldErrors.name)}
+                  aria-describedby={
+                    fieldErrors.name ? "name-error" : undefined
+                  }
                   className="w-full rounded-xl border border-neutral-300 px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/10"
                 />
+
+                {fieldErrors.name && (
+                  <p id="name-error" className="mt-2 text-sm text-red-600">
+                    {fieldErrors.name[0]}
+                  </p>
+                )}
               </div>
 
               <div>
@@ -253,8 +286,18 @@ export default function Contact() {
                   type="tel"
                   autoComplete="tel"
                   placeholder="Enter your phone number"
+                  aria-invalid={Boolean(fieldErrors.phone)}
+                  aria-describedby={
+                    fieldErrors.phone ? "phone-error" : undefined
+                  }
                   className="w-full rounded-xl border border-neutral-300 px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/10"
                 />
+
+                {fieldErrors.phone && (
+                  <p id="phone-error" className="mt-2 text-sm text-red-600">
+                    {fieldErrors.phone[0]}
+                  </p>
+                )}
               </div>
 
               <div>
@@ -269,6 +312,10 @@ export default function Contact() {
                   id="service"
                   name="service"
                   defaultValue=""
+                  aria-invalid={Boolean(fieldErrors.service)}
+                  aria-describedby={
+                    fieldErrors.service ? "service-error" : undefined
+                  }
                   className="w-full rounded-xl border border-neutral-300 bg-white px-4 py-3 text-neutral-900 focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/10"
                 >
                   <option value="" disabled>
@@ -281,6 +328,12 @@ export default function Contact() {
                     </option>
                   ))}
                 </select>
+
+                {fieldErrors.service && (
+                  <p id="service-error" className="mt-2 text-sm text-red-600">
+                    {fieldErrors.service[0]}
+                  </p>
+                )}
               </div>
 
               <div>
@@ -296,16 +349,39 @@ export default function Contact() {
                   name="message"
                   rows={5}
                   placeholder="Tell us how we can help you"
+                  aria-invalid={Boolean(fieldErrors.message)}
+                  aria-describedby={
+                    fieldErrors.message ? "message-error" : undefined
+                  }
                   className="w-full resize-y rounded-xl border border-neutral-300 px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/10"
                 />
+
+                {fieldErrors.message && (
+                  <p id="message-error" className="mt-2 text-sm text-red-600">
+                    {fieldErrors.message[0]}
+                  </p>
+                )}
               </div>
+
+              {state.message && (
+                <p
+                  role={state.success ? "status" : "alert"}
+                  aria-live="polite"
+                  className={
+                    state.success ? "text-sm text-green-700" : "text-sm text-red-600"
+                  }
+                >
+                  {state.message}
+                </p>
+              )}
 
               <button
                 type="submit"
                 aria-label={contact.enquiry.button}
-                className="inline-flex w-full items-center justify-center rounded-xl bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 sm:w-auto"
+                disabled={isPending}
+                className="inline-flex w-full items-center justify-center rounded-xl bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
               >
-                {contact.enquiry.button}
+                {isPending ? "Submitting..." : contact.enquiry.button}
               </button>
             </form>
           </div>
